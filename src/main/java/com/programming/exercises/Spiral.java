@@ -1,21 +1,22 @@
+package com.programming.exercises;
+
 public class Spiral {
 
-  public static void main(String args[]) {
-  
-    final int size = 10;
+    final static int size = 5;
+
+    public static void main(String[] args) {
         int[][] matrix = new int[size][size];
         int row = 0, column = 0, num = 0;
         char direction = nextDirection('0');
         int nextRow, nextColumn;
-        while (true) {
-            if (matrix[row][column] != 0) break;
+        while (matrix[row][column] == 0) {
 
             matrix[row][column] = ++num;
 
             nextRow = nextRow(row, direction);
             nextColumn = nextColumn(column, direction);
 
-            if (isValid(size, nextRow, nextColumn)) {
+            if (isValid(nextRow, nextColumn)) {
                 if (matrix[nextRow][nextColumn] == 0) {
                     row = nextRow;
                     column = nextColumn;
@@ -49,9 +50,9 @@ public class Spiral {
         return row;
     }
 
-    private static boolean isValid(int size, int nextRow, int nextColumn) {
-        return nextColumn >= 0 && nextColumn < size
-                && nextRow >= 0 && nextRow < size;
+    private static boolean isValid(int nextRow, int nextColumn) {
+        return nextColumn >= 0 && nextColumn < Spiral.size
+                && nextRow >= 0 && nextRow < Spiral.size;
     }
 
     private static char nextDirection(char direction) {
@@ -69,11 +70,11 @@ public class Spiral {
     }
 
     private static void print(int[][] matrix) {
-        for (int row = 0; row < matrix.length; row++) {
-            for (int column = 0; column < matrix.length; column++) {
-                System.out.print(matrix[row][column] + "\t");
+        for (int[] row : matrix) {
+            for (int elem : row) {
+                System.out.print(elem + "\t");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 }
