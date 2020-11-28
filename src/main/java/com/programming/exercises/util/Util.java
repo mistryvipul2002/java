@@ -1,5 +1,7 @@
 package com.programming.exercises.util;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -29,5 +31,9 @@ public class Util {
 
         Collections.rotate(arr, distance);
         return arr;
+    }
+
+    public static String randomString(int count) {
+        return RandomStringUtils.randomAlphabetic(count);
     }
 }
