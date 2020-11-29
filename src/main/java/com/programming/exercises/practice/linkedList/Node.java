@@ -17,7 +17,7 @@ public class Node {
         if (curr.data == d) {
             return curr.next;
         }
-        
+
         while (curr.next != null) {
             if (curr.next.data == d) {
                 curr.next = curr.next.next;
@@ -32,6 +32,28 @@ public class Node {
         Node curr = this;
         while (curr.next != null) curr = curr.next;
         return curr;
+    }
+
+    public Node seek(int n) {
+        Node curr = this;
+        int count = 0;
+        do {
+            if (count++ == n) {
+                return curr;
+            }
+            curr = curr.next;
+        } while (curr != null);
+        return null;
+    }
+
+    public int size() {
+        int count = 1;
+        Node curr = this;
+        while (curr.next != null) {
+            curr = curr.next;
+            count++;
+        }
+        return count;
     }
 
     @Override
@@ -63,18 +85,24 @@ public class Node {
         System.out.println("\nAdd 4");
         n.next = new Node(4);
         System.out.println(n);
+        System.out.println("Size = " + n.size());
 
         System.out.println("\nAdd 6");
         n.appendToLast(6);
         System.out.println(n);
 
-        System.out.println("\nAdd 6");
-        n.appendToLast(6);
+        System.out.println("\nAdd 8");
+        n.appendToLast(8);
         System.out.println(n);
 
-        System.out.println("\nAdd 6");
-        n.appendToLast(6);
+        System.out.println("\nAdd 9");
+        n.appendToLast(9);
         System.out.println(n);
+        System.out.println("Size = " + n.size());
+        for (int i = 0; i < 7; i++) {
+            final Node seek = n.seek(i);
+            System.out.println("Seek " + i + " = " + (seek == null ? null : seek.data));
+        }
 
         System.out.println("\nDelete 6");
         n.deleteNode(6);
