@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class RemoveDuplicates {
     public static void main(String[] args) {
-        Node head = Util.createRandomLinkedList();
+        Node head = Util.createRandomLinkedList(20);
         System.out.println(head);
 
         if (head.next != null) {
@@ -20,12 +20,11 @@ public class RemoveDuplicates {
             do {
                 if (existing.contains(curr.data)) {
                     prev.next = curr.next;
-                    curr = curr.next;
                 } else {
                     existing.add(curr.data);
                     prev = curr;
-                    curr = curr.next;
                 }
+                curr = curr.next;
             } while (curr != null);
         }
 
