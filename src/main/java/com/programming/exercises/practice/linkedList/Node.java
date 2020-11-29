@@ -18,14 +18,14 @@ public class Node {
             return curr.next;
         }
         
-        while (curr != null) {
-            if (curr.next != null && curr.next.data == d) {
+        while (curr.next != null) {
+            if (curr.next.data == d) {
                 curr.next = curr.next.next;
-                continue;
+                break;
             }
             curr = curr.next;
         }
-        return curr;
+        return this;
     }
 
     public Node seekLast() {
@@ -49,5 +49,43 @@ public class Node {
             curr = curr.next;
         }
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("\nInitialize");
+        Node n = null;
+        System.out.println(n);
+
+        System.out.println("\nAdd 2");
+        n = new Node(2);
+        System.out.println(n);
+
+        System.out.println("\nAdd 4");
+        n.next = new Node(4);
+        System.out.println(n);
+
+        System.out.println("\nAdd 6");
+        n.appendToLast(6);
+        System.out.println(n);
+
+        System.out.println("\nAdd 6");
+        n.appendToLast(6);
+        System.out.println(n);
+
+        System.out.println("\nAdd 6");
+        n.appendToLast(6);
+        System.out.println(n);
+
+        System.out.println("\nDelete 6");
+        n.deleteNode(6);
+        System.out.println(n);
+
+        System.out.println("\nDelete 4");
+        n.deleteNode(4);
+        System.out.println(n);
+
+        System.out.println("\nDelete 2");
+        Node newHead = n.deleteNode(2);
+        System.out.println(newHead);
     }
 }
