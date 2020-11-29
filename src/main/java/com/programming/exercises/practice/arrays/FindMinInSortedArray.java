@@ -1,4 +1,4 @@
-package com.programming.exercises;
+package com.programming.exercises.practice.arrays;
 
 import com.programming.exercises.util.Util;
 

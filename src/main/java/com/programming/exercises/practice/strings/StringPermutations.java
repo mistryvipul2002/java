@@ -1,4 +1,4 @@
-package com.programming.exercises;
+package com.programming.exercises.practice.strings;
 
 /**
  * Design an algorithm to print all permutations of a string. For simplicity, assume all characters are unique.
