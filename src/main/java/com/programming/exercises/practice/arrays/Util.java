@@ -1,4 +1,4 @@
-package com.programming.exercises.util;
+package com.programming.exercises.practice.arrays;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

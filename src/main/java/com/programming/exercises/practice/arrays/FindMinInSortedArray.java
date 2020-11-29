@@ -1,7 +1,5 @@
 package com.programming.exercises.practice.arrays;
 
-import com.programming.exercises.util.Util;
-
 import java.util.ArrayList;
 
 /**

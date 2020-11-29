@@ -1,8 +1,8 @@
-package com.programming.exercises.util;
+package com.programming.exercises.practice.matrix;
 
 import org.apache.commons.lang3.RandomUtils;
 
-public class MatrixUtil {
+public class Util {
 
     public static int[][] getRandomMatrix(final int n) {
         int[][] matrix = new int[n][n];

@@ -1,7 +1,5 @@
 package com.programming.exercises.practice.matrix;
 
-import com.programming.exercises.util.MatrixUtil;
-
 /**
  * Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column is set to 0.
  */
@@ -11,7 +9,7 @@ public class MatrixSetTo0 {
 
     public static void main(String[] args) {
         System.out.println("\nInput");
-        int[][] matrix = MatrixUtil.getRandomMatrix(n);
+        int[][] matrix = Util.getRandomMatrix(n);
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if(matrix[row][col] == 0){
@@ -30,7 +28,7 @@ public class MatrixSetTo0 {
         }
         
         System.out.println("\nOutput");
-        MatrixUtil.print(matrix);
+        Util.print(matrix);
     }
 
     private static void setRowCol0(int[][] matrix, int row, int col) {
