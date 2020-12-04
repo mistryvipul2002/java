@@ -12,7 +12,7 @@ public class MiddleElem {
         LinkedList<Integer> list = Util.createRandomLinkedList(null);
         System.out.println(list);
 
-        Node seek = null;
+        Node<Integer> seek = null;
         final int size = list.size();
         if (size % 2 == 1) {
             seek = list.seek(size / 2);

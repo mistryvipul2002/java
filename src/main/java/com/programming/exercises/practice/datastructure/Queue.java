@@ -25,7 +25,6 @@ public class Queue<T> extends LinkedCollection {
         }
     }
 
-
     public static void main(String[] args) {
         Queue<String> s = new Queue();
         System.out.println(s);

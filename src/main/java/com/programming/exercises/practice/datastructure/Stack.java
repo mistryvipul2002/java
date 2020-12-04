@@ -1,14 +1,16 @@
 package com.programming.exercises.practice.datastructure;
 
-public class Stack<T> extends LinkedCollection {
+import org.apache.commons.lang3.RandomUtils;
 
-    public Node<T> pop() {
+public class Stack<T extends Comparable<T>> extends LinkedCollection<T> {
+
+    public T pop() {
         if (head == null)
             return null;
 
-        Node popped = head.next;
+        Node<T> popped = head.next;
         head = head.next;
-        return popped;
+        return popped.data;
     }
 
     public void push(T data) {
@@ -16,20 +18,34 @@ public class Stack<T> extends LinkedCollection {
     }
 
     public static void main(String[] args) {
-        Stack<String> s = new Stack<>();
+        Stack<Integer> s = new Stack<>();
         System.out.println(s);
 
-        s.push("45");
+        s.push(RandomUtils.nextInt() % 100);
         System.out.println(s);
 
-        s.push("34");
+        s.push(RandomUtils.nextInt() % 100);
         System.out.println(s);
 
-        s.push("73");
+        s.push(RandomUtils.nextInt() % 100);
+        System.out.println(s);
+
+        s.push(RandomUtils.nextInt() % 100);
+        System.out.println(s);
+
+        s.push(RandomUtils.nextInt() % 100);
+        System.out.println(s);
+
+        s.push(RandomUtils.nextInt() % 100);
+        System.out.println(s);
+
+        s.push(RandomUtils.nextInt() % 100);
         System.out.println(s);
 
         s.pop();
         System.out.println(s);
+
+        System.out.println(s.min());
     }
 
 }
