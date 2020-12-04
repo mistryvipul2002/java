@@ -11,12 +11,6 @@ public class LinkedList<T> extends LinkedCollection<T> {
         return this;
     }
 
-    public void add(T d) {
-        final Node<T> t = new Node<>(d);
-        t.next = head;
-        head = t;
-    }
-
     public void appendToLast(T d) {
         if (size() == 0) head = new Node<>(d);
         else seekLast().next = new Node(d);

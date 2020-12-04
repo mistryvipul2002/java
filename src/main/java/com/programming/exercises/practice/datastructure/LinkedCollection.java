@@ -3,6 +3,12 @@ package com.programming.exercises.practice.datastructure;
 public abstract class LinkedCollection<T> {
     
     protected Node<T> head;
+
+    public void add(T d) {
+        final Node<T> t = new Node<>(d);
+        t.next = head;
+        head = t;
+    }
     
     @Override
     public String toString() {

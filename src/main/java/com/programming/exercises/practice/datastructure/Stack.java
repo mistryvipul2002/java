@@ -12,33 +12,11 @@ public class Stack<T> extends LinkedCollection {
     }
 
     public void push(T data) {
-        Node n = new Node(data);
-        n.next = head;
-        head = n;
-    }
-
-    @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer("Stack: ");
-
-        if (head != null) {
-            Node curr = head;
-            while (curr != null) {
-                sb.append(curr.data);
-
-                // little hack
-                if (curr.next != null)
-                    sb.append("->");
-
-                // move to next
-                curr = curr.next;
-            }
-        }
-        return sb.toString();
+        super.add(data);
     }
 
     public static void main(String[] args) {
-        Stack<String> s = new Stack();
+        Stack<String> s = new Stack<>();
         System.out.println(s);
 
         s.push("45");
