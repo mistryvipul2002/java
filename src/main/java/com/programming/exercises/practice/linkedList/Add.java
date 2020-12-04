@@ -1,7 +1,7 @@
 package com.programming.exercises.practice.linkedList;
 
-import com.programming.exercises.practice.linkedList.datastructure.LinkedList;
-import com.programming.exercises.practice.linkedList.datastructure.Node;
+import com.programming.exercises.practice.datastructure.LinkedList;
+import com.programming.exercises.practice.datastructure.Node;
 
 /**
  * You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a function that adds the two numbers and returns the sum as a linked list.
@@ -24,10 +24,10 @@ public class Add {
         if (num1 == null) return num2;
         if (num2 == null) return num1;
 
-        Node<Integer> curr1 = num1.head;
-        Node<Integer> curr2 = num2.head;
+        Node<Integer> curr1 = num1.getHead();
+        Node<Integer> curr2 = num2.getHead();
 
-        LinkedList<Integer> sum = new LinkedList<>(null);
+        LinkedList<Integer> sum = new LinkedList<>();
 
         int carry = 0;
         do {

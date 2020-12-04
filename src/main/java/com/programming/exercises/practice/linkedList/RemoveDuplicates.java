@@ -1,7 +1,7 @@
 package com.programming.exercises.practice.linkedList;
 
-import com.programming.exercises.practice.linkedList.datastructure.LinkedList;
-import com.programming.exercises.practice.linkedList.datastructure.Node;
+import com.programming.exercises.practice.datastructure.LinkedList;
+import com.programming.exercises.practice.datastructure.Node;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,7 @@ public class RemoveDuplicates {
         LinkedList<Integer> list = Util.createRandomLinkedList(20);
         System.out.println(list);
 
-        Node<Integer> head = list.head;
+        Node<Integer> head = list.getHead();
         if (head.next != null) {
             Node<Integer> prev = head;
             Set<Integer> existing = new HashSet<>();

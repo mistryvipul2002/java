@@ -1,29 +1,20 @@
-package com.programming.exercises.practice.linkedList.datastructure;
+package com.programming.exercises.practice.datastructure;
 
-public class LinkedList<T> {
-    public Node<T> head;
+public class LinkedList<T> extends LinkedCollection<T> {
 
-    public LinkedList(Node head) {
-        this.head = head;
+    public Node<T> getHead(){
+        return head;
     }
 
-    @Override
-    public String toString() {
-        if (head == null) return null;
+    public LinkedList<T> head(Node<T> head) {
+        this.head = head;
+        return this;
+    }
 
-        StringBuffer sb = new StringBuffer();
-        Node curr = head;
-        while (curr != null) {
-            sb.append(curr.data);
-
-            // little hack
-            if (curr.next != null)
-                sb.append("->");
-
-            // move to next
-            curr = curr.next;
-        }
-        return sb.toString();
+    public void add(T d) {
+        final Node<T> t = new Node<>(d);
+        t.next = head;
+        head = t;
     }
 
     public void appendToLast(T d) {
@@ -31,6 +22,9 @@ public class LinkedList<T> {
         else seekLast().next = new Node(d);
     }
 
+    /**
+     * Delete the first occurrence of data d
+     */
     public void deleteNode(T d) {
         if (head.data == d) {
             head = head.next;
@@ -67,7 +61,7 @@ public class LinkedList<T> {
 
     public int size() {
         if (head == null) return 0;
-        
+
         int count = 1;
         Node curr = head;
         while (curr.next != null) {
@@ -79,7 +73,7 @@ public class LinkedList<T> {
 
     public static void main(String[] args) {
         System.out.println("\nInitialize");
-        LinkedList list = new LinkedList<Integer>(null);
+        LinkedList list = new LinkedList<Integer>();
         System.out.println(list);
 
         System.out.println("\nAdd 2");
@@ -87,20 +81,20 @@ public class LinkedList<T> {
         System.out.println(list);
 
         System.out.println("\nAdd 4");
-        list.head.next = new Node(4);
+        list.add(4);
         System.out.println(list);
         System.out.println("Size = " + list.size());
 
         System.out.println("\nAdd 6");
-        list.appendToLast(6);
+        list.add(6);
         System.out.println(list);
 
         System.out.println("\nAdd 8");
-        list.appendToLast(8);
+        list.add(8);
         System.out.println(list);
 
         System.out.println("\nAdd 9");
-        list.appendToLast(9);
+        list.add(9);
         System.out.println(list);
         System.out.println("Size = " + list.size());
         for (int i = 0; i < 7; i++) {
@@ -120,4 +114,5 @@ public class LinkedList<T> {
         list.deleteNode(2);
         System.out.println(list);
     }
+
 }

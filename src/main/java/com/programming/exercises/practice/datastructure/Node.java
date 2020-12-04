@@ -1,4 +1,4 @@
-package com.programming.exercises.practice.linkedList.datastructure;
+package com.programming.exercises.practice.datastructure;
 
 public class Node<T> {
     public T data;

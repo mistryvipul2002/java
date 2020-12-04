@@ -1,7 +1,7 @@
 package com.programming.exercises.practice.linkedList;
 
-import com.programming.exercises.practice.linkedList.datastructure.LinkedList;
-import com.programming.exercises.practice.linkedList.datastructure.Node;
+import com.programming.exercises.practice.datastructure.LinkedList;
+import com.programming.exercises.practice.datastructure.Node;
 
 /**
  * Find middle elem
