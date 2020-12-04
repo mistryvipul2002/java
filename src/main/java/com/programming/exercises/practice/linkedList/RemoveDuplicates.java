@@ -1,5 +1,8 @@
 package com.programming.exercises.practice.linkedList;
 
+import com.programming.exercises.practice.linkedList.datastructure.LinkedList;
+import com.programming.exercises.practice.linkedList.datastructure.Node;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,14 +11,15 @@ import java.util.Set;
  */
 public class RemoveDuplicates {
     public static void main(String[] args) {
-        Node head = Util.createRandomLinkedList(20);
-        System.out.println(head);
+        LinkedList<Integer> list = Util.createRandomLinkedList(20);
+        System.out.println(list);
 
+        Node<Integer> head = list.head;
         if (head.next != null) {
-            Node prev = head;
+            Node<Integer> prev = head;
             Set<Integer> existing = new HashSet<>();
             existing.add(head.data);
-            Node curr = head.next;
+            Node<Integer> curr = head.next;
 
             do {
                 if (existing.contains(curr.data)) {
@@ -28,6 +32,6 @@ public class RemoveDuplicates {
             } while (curr != null);
         }
 
-        System.out.println(head);
+        System.out.println(list);
     }
 }

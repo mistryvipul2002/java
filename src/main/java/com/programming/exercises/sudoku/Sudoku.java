@@ -240,10 +240,12 @@ public class Sudoku {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sb
-                        .append(sudo[i][j].data)
-                        .append(sudo[i][j].prob)
-                        .append(", ");
+                final Cell cell = sudo[i][j];
+                sb.append(cell.data);
+                if (!cell.prob.isEmpty()) {
+                    sb.append(cell.prob);
+                }
+                sb.append(", ");
             }
             sb.append("\n");
         }
