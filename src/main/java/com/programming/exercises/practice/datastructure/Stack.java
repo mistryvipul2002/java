@@ -8,7 +8,7 @@ public class Stack<T extends Comparable<T>> extends LinkedCollection<T> {
         if (head == null)
             return null;
 
-        Node<T> popped = head.next;
+        Node<T> popped = head;
         head = head.next;
         return popped.data;
     }
