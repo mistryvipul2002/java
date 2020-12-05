@@ -8,10 +8,10 @@ public class Hanoi {
     public static void main(String[] args) {
         Stack<Integer>[] stacks = new Stack[]{new Stack<Integer>(), new Stack<Integer>(), new Stack<Integer>()};
         for (int i = 0; i < tot; i++) {
-            stacks[0].add(tot-i);
+            stacks[0].add(tot - i);
         }
         System.out.println(stacks[0] + "   " + stacks[1] + "   " + stacks[2]);
-        
+
         moveFromTo(0, 2, stacks, tot);
     }
 
