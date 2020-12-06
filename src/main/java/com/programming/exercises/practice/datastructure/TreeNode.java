@@ -40,6 +40,7 @@ public class TreeNode<T extends Comparable<T>> {
             // go left
             if (node.left == null) {
                 node.left = new TreeNode<>(data);
+                node.left.isBinarySearch = false;
             } else {
                 addRandom(node.left, data);
             }
@@ -47,20 +48,52 @@ public class TreeNode<T extends Comparable<T>> {
             // go right
             if (node.right == null) {
                 node.right = new TreeNode<>(data);
+                node.right.isBinarySearch = false;
             } else {
                 addRandom(node.right, data);
             }
         }
     }
 
-    public boolean isFoundInBinary(T data) {
-        if (data.compareTo(this.data) == 0) {
-            return true;
-        } else {
-            if (data.compareTo(this.data) < 0) {
-                return left == null ? false : left.isFoundInBinary(data);
+    public boolean isFound(T data) {
+        if (isBinarySearch) {
+            if (data.compareTo(this.data) == 0) {
+                return true;
             } else {
-                return right == null ? false : right.isFoundInBinary(data);
+                if (data.compareTo(this.data) < 0) {
+                    return left == null ? false : left.isFound(data);
+                } else {
+                    return right == null ? false : right.isFound(data);
+                }
+            }
+        } else {
+            if (data.compareTo(this.data) == 0) {
+                return true;
+            } else {
+                if (left != null && left.isFound(data)) return true;
+                if (right != null && right.isFound(data)) return true;
+                return false;
+            }
+        }
+    }
+
+    public void delete(T data) {
+        if (isBinarySearch) {
+            if (data.compareTo(this.data) == 0) {
+
+            } else {
+                if (data.compareTo(this.data) < 0) {
+                    if (left != null) left.delete(data);
+                } else {
+                    if (right != null) right.delete(data);
+                }
+            }
+        } else {
+            if (data.compareTo(this.data) == 0) {
+
+            } else {
+                left.delete(data);
+                right.delete(data);
             }
         }
     }

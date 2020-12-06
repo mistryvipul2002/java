@@ -7,7 +7,7 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             treeNode.add(RandomUtils.nextInt() % 100);
         }
         System.out.println(treeNode);
@@ -19,7 +19,7 @@ public class BinarySearchTree {
 
         // search
         final int toFind = RandomUtils.nextInt() % 100;
-        final boolean foundInBinary = treeNode.isFoundInBinary(toFind);
-        System.out.println("\n" + toFind + " " + (foundInBinary ? "" : "not") + " found");
+        final boolean isFound = treeNode.isFound(toFind);
+        System.out.println("\n" + toFind + " " + (isFound ? "" : "not") + " found");
     }
 }

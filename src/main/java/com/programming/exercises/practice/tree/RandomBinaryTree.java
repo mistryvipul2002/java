@@ -8,7 +8,7 @@ public class RandomBinaryTree {
     public static void main(String[] args) {
         TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
         treeNode.isBinarySearch = false;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             treeNode.add(RandomUtils.nextInt() % 100);
         }
         System.out.println(treeNode);
@@ -25,5 +25,10 @@ public class RandomBinaryTree {
         sb = new StringBuffer("Post-order: ");
         treeNode.postOrder(sb);
         System.out.println(sb);
+
+        // search
+        final int toFind = RandomUtils.nextInt() % 100;
+        final boolean isFound = treeNode.isFound(toFind);
+        System.out.println("\n" + toFind + " " + (isFound ? "" : "not") + " found");
     }
 }
