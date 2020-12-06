@@ -10,18 +10,18 @@ public class TreeNode<T extends Comparable<T>> {
         this.data = d;
     }
 
-    public void addBalanced(T data) {
+    public void addSorted(T data) {
         if (data.compareTo(this.data) >= 0) {
             if (right == null) {
                 right = new TreeNode<T>(data);
             } else {
-                right.addBalanced(data);
+                right.addSorted(data);
             }
         } else {
             if (left == null) {
                 left = new TreeNode<T>(data);
             } else {
-                left.addBalanced(data);
+                left.addSorted(data);
             }
         }
     }
@@ -48,6 +48,24 @@ public class TreeNode<T extends Comparable<T>> {
             node.right = new TreeNode<>(RandomUtils.nextInt() % 100);
             populateRandom(node.right, levels - 1);
         }
+    }
+
+    public void inOrder(StringBuffer sb) {
+        if (left != null) left.inOrder(sb);
+        sb.append(data + ", ");
+        if (right != null) right.inOrder(sb);
+    }
+
+    public void preOrder(StringBuffer sb) {
+        sb.append(data + ", ");
+        if (left != null) left.preOrder(sb);
+        if (right != null) right.preOrder(sb);
+    }
+
+    public void postOrder(StringBuffer sb) {
+        if (left != null) left.postOrder(sb);
+        if (right != null) right.postOrder(sb);
+        sb.append(data + ", ");
     }
 
     @Override

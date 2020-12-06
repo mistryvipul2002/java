@@ -10,5 +10,19 @@ public class RandomBinaryTree {
         treeNode.populateRandom(treeNode, 5);
 
         System.out.println(treeNode);
+
+        // Traversal the tree
+
+        StringBuffer sb = new StringBuffer("Pre-order: ");
+        treeNode.preOrder(sb);
+        System.out.println(sb);
+
+        sb = new StringBuffer("In-order: ");
+        treeNode.inOrder(sb);
+        System.out.println(sb);
+
+        sb = new StringBuffer("Post-order: ");
+        treeNode.postOrder(sb);
+        System.out.println(sb);
     }
 }
