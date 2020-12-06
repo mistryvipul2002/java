@@ -55,6 +55,24 @@ public class TreeNode<T extends Comparable<T>> {
         }
     }
 
+    public boolean hasNoChild() {
+        return left == null && right == null;
+    }
+
+    public boolean hasSingleChild() {
+        return (left == null && right != null) || (left != null && right == null);
+    }
+
+    public TreeNode<T> getSingleChild() {
+        if (left != null) return left;
+        if (right != null) return right;
+        return null;
+    }
+
+    public boolean hasBothChildren() {
+        return left != null && right != null;
+    }
+
     public boolean isFound(T data) {
         if (isBinarySearch) {
             if (data.compareTo(this.data) == 0) {
@@ -77,26 +95,39 @@ public class TreeNode<T extends Comparable<T>> {
         }
     }
 
-    public void delete(T data) {
-        if (isBinarySearch) {
-            if (data.compareTo(this.data) == 0) {
-
-            } else {
-                if (data.compareTo(this.data) < 0) {
-                    if (left != null) left.delete(data);
-                } else {
-                    if (right != null) right.delete(data);
-                }
-            }
-        } else {
-            if (data.compareTo(this.data) == 0) {
-
-            } else {
-                left.delete(data);
-                right.delete(data);
-            }
-        }
-    }
+//    public TreeNode<T> delete(T d) {
+//        if (isBinarySearch) {
+//            if (d.compareTo(data) == 0) {
+//
+//            } else {
+//                if (d.compareTo(data) < 0) {
+//                    if (left != null) left.delete(d);
+//                } else {
+//                    if (right != null) right.delete(d);
+//                }
+//            }
+//        } else {
+//            if (d.compareTo(data) == 0) {
+//                return null;
+//            }
+//
+//            if (d.compareTo(left.data) == 0) {
+//                if (left.hasNoChild()) {
+//                    left = null;
+//                    return this;
+//                }
+//                if (left.hasSingleChild()) {
+//                    left = left.getSingleChild();
+//                    return this;
+//                }
+//                if (left.hasBothChildren()) {
+//                    left = left.getSingleChild();
+//                    return this;
+//                }
+//
+//            }
+//        }
+//    }
 
 //    public void populateRandom(TreeNode<Integer> node, int levels) {
 //        if (levels == 0) return;

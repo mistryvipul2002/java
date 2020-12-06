@@ -7,7 +7,7 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
         TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             treeNode.add(RandomUtils.nextInt() % 100);
         }
         System.out.println(treeNode);
