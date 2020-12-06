@@ -9,7 +9,7 @@ import com.programming.exercises.practice.datastructure.Node;
 public class MiddleElem {
 
     public static void main(String[] args) {
-        LinkedList<Integer> list = Util.createRandomLinkedList(null);
+        LinkedList<Integer> list = LinkedListUtil.createRandomLinkedList(null);
         System.out.println(list);
 
         Node<Integer> seek = null;

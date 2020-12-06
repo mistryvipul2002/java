@@ -9,7 +9,7 @@ import com.programming.exercises.practice.datastructure.Node;
 public class RemoveDuplicatesWithoutBuffer {
 
     public static void main(String[] args) {
-        LinkedList<Integer> list = Util.createRandomLinkedList(20);
+        LinkedList<Integer> list = LinkedListUtil.createRandomLinkedList(20);
         System.out.println(list);
 
         Node<Integer> curr = list.getHead();

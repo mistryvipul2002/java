@@ -12,9 +12,9 @@ import com.programming.exercises.practice.datastructure.Node;
 public class Add {
 
     public static void main(String[] args) {
-        final LinkedList<Integer> num1 = Util.createRandomLinkedList(4);
+        final LinkedList<Integer> num1 = LinkedListUtil.createRandomLinkedList(4);
         System.out.println(num1);
-        final LinkedList<Integer> num2 = Util.createRandomLinkedList(4);
+        final LinkedList<Integer> num2 = LinkedListUtil.createRandomLinkedList(4);
         System.out.println(num2);
 
         System.out.println("Add = " + add(num1, num2));

@@ -3,7 +3,7 @@ package com.programming.exercises.practice.stack;
 import com.programming.exercises.practice.datastructure.Stack;
 
 public class Hanoi {
-    private static final int tot = 4;
+    private static final int tot = 10;
 
     public static void main(String[] args) {
         Stack<Integer>[] stacks = new Stack[]{new Stack<Integer>(), new Stack<Integer>(), new Stack<Integer>()};

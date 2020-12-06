@@ -9,7 +9,7 @@ public class MatrixSetTo0 {
 
     public static void main(String[] args) {
         System.out.println("\nInput");
-        int[][] matrix = Util.getRandomMatrix(n);
+        int[][] matrix = MatrixUtil.getRandomMatrix(n);
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if(matrix[row][col] == 0){
@@ -28,7 +28,7 @@ public class MatrixSetTo0 {
         }
         
         System.out.println("\nOutput");
-        Util.print(matrix);
+        MatrixUtil.print(matrix);
     }
 
     private static void setRowCol0(int[][] matrix, int row, int col) {

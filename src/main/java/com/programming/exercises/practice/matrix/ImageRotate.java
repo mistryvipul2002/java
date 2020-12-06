@@ -8,7 +8,7 @@ public class ImageRotate {
 
     public static void main(String[] args) {
         System.out.println("\nInput");
-        int[][] image = Util.getRandomMatrix(n);
+        int[][] image = MatrixUtil.getRandomMatrix(n);
         int[][] imageRotated = new int[n][n];
         for (int row = 0; row < image.length; row++) {
             for (int col = 0; col < image[row].length; col++) {
@@ -16,7 +16,7 @@ public class ImageRotate {
             }
         }
         System.out.println("\nOutput");
-        Util.print(imageRotated);
+        MatrixUtil.print(imageRotated);
     }
 
 }
