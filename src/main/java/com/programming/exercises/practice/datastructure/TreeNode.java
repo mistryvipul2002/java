@@ -3,6 +3,7 @@ package com.programming.exercises.practice.datastructure;
 import org.apache.commons.lang3.RandomUtils;
 
 public class TreeNode<T extends Comparable<T>> {
+    public boolean isBinarySearch = true;
     public T data;
     public TreeNode<T> left, right;
 
@@ -10,7 +11,15 @@ public class TreeNode<T extends Comparable<T>> {
         this.data = d;
     }
 
-    public void addSorted(T data) {
+    public void add(T data) {
+        if (isBinarySearch) {
+            addSorted(data);
+        } else {
+            addRandom(this, data);
+        }
+    }
+
+    private void addSorted(T data) {
         if (data.compareTo(this.data) >= 0) {
             if (right == null) {
                 right = new TreeNode<T>(data);
@@ -26,29 +35,59 @@ public class TreeNode<T extends Comparable<T>> {
         }
     }
 
-    public void populateRandom(TreeNode<Integer> node, int levels) {
-        if (levels == 0) return;
-
-        int numChildren = RandomUtils.nextInt() % 3;
-        if (numChildren == 0) return;
-        if (numChildren == 1) {
-            boolean isLeft = RandomUtils.nextInt() % 2 == 0;
-            if (isLeft) {
-                node.left = new TreeNode<>(RandomUtils.nextInt() % 100);
-                populateRandom(node.left, levels - 1);
+    private void addRandom(TreeNode<T> node, T data) {
+        if (RandomUtils.nextInt() % 2 == 0) {
+            // go left
+            if (node.left == null) {
+                node.left = new TreeNode<>(data);
             } else {
-                node.right = new TreeNode<>(RandomUtils.nextInt() % 100);
-                populateRandom(node.right, levels - 1);
+                addRandom(node.left, data);
+            }
+        } else {
+            // go right
+            if (node.right == null) {
+                node.right = new TreeNode<>(data);
+            } else {
+                addRandom(node.right, data);
             }
         }
-        if (numChildren == 2) {
-            node.left = new TreeNode<>(RandomUtils.nextInt() % 100);
-            populateRandom(node.left, levels - 1);
+    }
 
-            node.right = new TreeNode<>(RandomUtils.nextInt() % 100);
-            populateRandom(node.right, levels - 1);
+    public boolean isFoundInBinary(T data) {
+        if (data.compareTo(this.data) == 0) {
+            return true;
+        } else {
+            if (data.compareTo(this.data) < 0) {
+                return left == null ? false : left.isFoundInBinary(data);
+            } else {
+                return right == null ? false : right.isFoundInBinary(data);
+            }
         }
     }
+
+//    public void populateRandom(TreeNode<Integer> node, int levels) {
+//        if (levels == 0) return;
+//
+//        int numChildren = RandomUtils.nextInt() % 3;
+//        if (numChildren == 0) return;
+//        if (numChildren == 1) {
+//            boolean isLeft = RandomUtils.nextInt() % 2 == 0;
+//            if (isLeft) {
+//                node.left = new TreeNode<>(RandomUtils.nextInt() % 100);
+//                populateRandom(node.left, levels - 1);
+//            } else {
+//                node.right = new TreeNode<>(RandomUtils.nextInt() % 100);
+//                populateRandom(node.right, levels - 1);
+//            }
+//        }
+//        if (numChildren == 2) {
+//            node.left = new TreeNode<>(RandomUtils.nextInt() % 100);
+//            populateRandom(node.left, levels - 1);
+//
+//            node.right = new TreeNode<>(RandomUtils.nextInt() % 100);
+//            populateRandom(node.right, levels - 1);
+//        }
+//    }
 
     public void inOrder(StringBuffer sb) {
         if (left != null) left.inOrder(sb);

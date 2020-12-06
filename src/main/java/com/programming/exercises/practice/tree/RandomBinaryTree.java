@@ -6,13 +6,14 @@ import org.apache.commons.lang3.RandomUtils;
 public class RandomBinaryTree {
 
     public static void main(String[] args) {
-        TreeNode<Integer> treeNode = new TreeNode<Integer>(RandomUtils.nextInt() % 100);
-        treeNode.populateRandom(treeNode, 5);
-
+        TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
+        treeNode.isBinarySearch = false;
+        for (int i = 0; i < 10; i++) {
+            treeNode.add(RandomUtils.nextInt() % 100);
+        }
         System.out.println(treeNode);
 
         // Traversal the tree
-
         StringBuffer sb = new StringBuffer("Pre-order: ");
         treeNode.preOrder(sb);
         System.out.println(sb);
