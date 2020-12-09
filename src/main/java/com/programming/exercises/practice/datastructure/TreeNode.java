@@ -2,6 +2,10 @@ package com.programming.exercises.practice.datastructure;
 
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class TreeNode<T extends Comparable<T>> {
     public boolean isBinarySearch = true;
     public T data;
@@ -124,6 +128,32 @@ public class TreeNode<T extends Comparable<T>> {
      */
     public boolean isBalanced() {
         return maxHeight() - minHeight() <= 1;
+    }
+
+    /**
+     * Given a binary search tree, design an algorithm which creates a linked list of all the nodes at each depth (i.e., if you have a tree with depth D, you’ll have D linked lists).
+     */
+    public List<List<TreeNode<T>>> listNodesForEachDepth() {
+        List<List<TreeNode<T>>> lists = new ArrayList<>();
+        lists.add(Arrays.asList(this));
+
+        List<TreeNode<T>> tempList;
+
+        do {
+            tempList = lists.get(lists.size() - 1);
+
+            final List<TreeNode<T>> list = new ArrayList<>();
+
+            for (TreeNode<T> tempNode : tempList) {
+                if (tempNode.left != null) list.add(tempNode.left);
+                if (tempNode.right != null) list.add(tempNode.right);
+            }
+
+            if (list.isEmpty()) break;
+            else lists.add(list);
+        } while (!tempList.isEmpty());
+
+        return lists;
     }
 
 //    public TreeNode<T> delete(T d) {

@@ -3,6 +3,8 @@ package com.programming.exercises.practice.tree;
 import com.programming.exercises.practice.datastructure.TreeNode;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.List;
+
 public class RandomBinaryTree {
 
     public static void main(String[] args) {
@@ -34,6 +36,16 @@ public class RandomBinaryTree {
         final int toFind = RandomUtils.nextInt() % 100;
         final boolean isFound = treeNode.isFound(toFind);
         System.out.println("\n" + toFind + " " + (isFound ? "" : "not") + " found");
+
+        // print linked list
+        System.out.println("\n\nLinked lists");
+        final List<List<TreeNode<Integer>>> lists = treeNode.listNodesForEachDepth();
+        for (List<TreeNode<Integer>> list: lists) {
+            for (TreeNode<Integer> node: list) {
+                System.out.print(node.data + ",");
+            }
+            System.out.println();
+        }
 
 //        if (isFound) {
 //            // delete
