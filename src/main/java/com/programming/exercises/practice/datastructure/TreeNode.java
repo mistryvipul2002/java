@@ -55,7 +55,7 @@ public class TreeNode<T extends Comparable<T>> {
         }
     }
 
-    public boolean hasNoChild() {
+    public boolean isLeaf() {
         return left == null && right == null;
     }
 
@@ -66,6 +66,20 @@ public class TreeNode<T extends Comparable<T>> {
     public TreeNode<T> getSingleChild() {
         if (left != null) return left;
         if (right != null) return right;
+        return null;
+    }
+
+    public TreeNode<T> getAnyLeafChild() {
+        if (isLeaf()) return null;
+
+        if (left != null) {
+            return left.isLeaf() ? left : left.getAnyLeafChild();
+        }
+
+        if (right != null) {
+            return right.isLeaf() ? right : right.getAnyLeafChild();
+        }
+
         return null;
     }
 
@@ -93,6 +107,36 @@ public class TreeNode<T extends Comparable<T>> {
                 return false;
             }
         }
+    }
+
+    public int maxHeight() {
+        if (isLeaf()) return 1;
+        int leftDepth = 0, rightDepth = 0;
+        if (left != null) {
+            leftDepth = left.maxHeight();
+        }
+        if (right != null) {
+            rightDepth = right.maxHeight();
+        }
+
+        return 1 + Math.max(leftDepth, rightDepth);
+    }
+
+    public int minHeight() {
+        if (isLeaf()) return 1;
+        int leftDepth = 0, rightDepth = 0;
+        if (left != null) {
+            leftDepth = left.minHeight();
+        }
+        if (right != null) {
+            rightDepth = right.minHeight();
+        }
+
+        return 1 + Math.min(leftDepth, rightDepth);
+    }
+
+    public boolean isBalanced() {
+        return maxHeight()-minHeight() <= 1;
     }
 
 //    public TreeNode<T> delete(T d) {

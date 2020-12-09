@@ -26,6 +26,10 @@ public class RandomBinaryTree {
         treeNode.postOrder(sb);
         System.out.println(sb);
 
+        System.out.println("Max-Depth: " + treeNode.maxHeight());
+        System.out.println("Min-Depth: " + treeNode.minHeight());
+        System.out.println("IsBalanced: " + treeNode.isBalanced());
+
         // search
         final int toFind = RandomUtils.nextInt() % 100;
         final boolean isFound = treeNode.isFound(toFind);
