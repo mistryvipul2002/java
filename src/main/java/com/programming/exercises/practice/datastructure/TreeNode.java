@@ -111,32 +111,19 @@ public class TreeNode<T extends Comparable<T>> {
 
     public int maxHeight() {
         if (isLeaf()) return 1;
-        int leftDepth = 0, rightDepth = 0;
-        if (left != null) {
-            leftDepth = left.maxHeight();
-        }
-        if (right != null) {
-            rightDepth = right.maxHeight();
-        }
-
-        return 1 + Math.max(leftDepth, rightDepth);
+        return 1 + Math.max(left == null ? 0 : left.maxHeight(), right == null ? 0 : right.maxHeight());
     }
 
     public int minHeight() {
         if (isLeaf()) return 1;
-        int leftDepth = 0, rightDepth = 0;
-        if (left != null) {
-            leftDepth = left.minHeight();
-        }
-        if (right != null) {
-            rightDepth = right.minHeight();
-        }
-
-        return 1 + Math.min(leftDepth, rightDepth);
+        return 1 + Math.min(left == null ? 0 : left.minHeight(), right == null ? 0 : right.minHeight());
     }
 
+    /**
+     * A balanced tree is defined to be a tree such that no two leaf nodes differ in distance from the root by more than one.
+     */
     public boolean isBalanced() {
-        return maxHeight()-minHeight() <= 1;
+        return maxHeight() - minHeight() <= 1;
     }
 
 //    public TreeNode<T> delete(T d) {
@@ -197,18 +184,21 @@ public class TreeNode<T extends Comparable<T>> {
 //        }
 //    }
 
+    // LDR (left-data-right)
     public void inOrder(StringBuffer sb) {
         if (left != null) left.inOrder(sb);
         sb.append(data + ", ");
         if (right != null) right.inOrder(sb);
     }
 
+    // DLR
     public void preOrder(StringBuffer sb) {
         sb.append(data + ", ");
         if (left != null) left.preOrder(sb);
         if (right != null) right.preOrder(sb);
     }
 
+    //LRD
     public void postOrder(StringBuffer sb) {
         if (left != null) left.postOrder(sb);
         if (right != null) right.postOrder(sb);
