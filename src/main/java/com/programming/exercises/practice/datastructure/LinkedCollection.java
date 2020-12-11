@@ -68,6 +68,10 @@ public abstract class LinkedCollection<T extends Comparable<T>> {
         return min;
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+    
     public int size() {
         if (head == null) return 0;
 
