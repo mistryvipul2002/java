@@ -130,15 +130,15 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
     }
 
     public boolean isRouteExist(T source, T dest) {
-        if (source.equals(dest)) throw new IllegalArgumentException();
+        if (source.equals(dest)) throw new RuntimeException("Same source and dest!");
 
         Validate.notNull(source);
-        Validate.isTrue(isVertex(source), source + " not present");
+        Validate.isTrue(isVertex(source), source + " not a vertex");
         final Vertex<T, W> sourceVertex = getVertex(source);
         visited.add(sourceVertex);
 
         Validate.notNull(dest);
-        Validate.isTrue(isVertex(dest), dest + " not present");
+        Validate.isTrue(isVertex(dest), dest + " not a vertex");
         final Vertex<T, W> destVertex = getVertex(dest);
         Validate.notNull(destVertex);
 

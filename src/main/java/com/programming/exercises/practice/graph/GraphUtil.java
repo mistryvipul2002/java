@@ -15,14 +15,14 @@ public class GraphUtil {
     }
 
     public static void main(String[] args) {
-        final Graph<String, Integer> graph = randomGraph(false);
+        final Graph<String, Integer> graph = randomGraph(true);
         System.out.println(graph);
 
         final String dataStartingNode = RandomStringUtils.randomNumeric(1);
         System.out.println("Starting node -> " + dataStartingNode);
         System.out.println();
 
-        Validate.isTrue(graph.isVertex(dataStartingNode));
+        Validate.isTrue(graph.isVertex(dataStartingNode), dataStartingNode + " not a vertex!");
 
         // dfs with stack
         System.out.println("DFS with stack -> " + graph.dfsWithStack(dataStartingNode));
