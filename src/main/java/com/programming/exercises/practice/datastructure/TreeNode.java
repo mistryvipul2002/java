@@ -131,6 +131,24 @@ public class TreeNode<T extends Comparable<T>> {
     }
 
     /**
+     * Breadth First Search (BFS)
+     */
+    public String bfs() {
+        Queue<TreeNode<T>> queue = new Queue<>();
+        queue.enqueue(this);
+
+        StringBuffer sb = new StringBuffer();
+        do {
+            final TreeNode<T> tempNode = queue.dequeue().data;
+            sb.append(tempNode.data + ",");
+            if (tempNode.left != null) queue.enqueue(tempNode.left);
+            if (tempNode.right != null) queue.enqueue(tempNode.right);
+        } while (!queue.isEmpty());
+
+        return sb.toString();
+    }
+
+    /**
      * Given a binary search tree, design an algorithm which creates a linked list of all the nodes at each depth (i.e., if you have a tree with depth D, you’ll have D linked lists).
      */
     public List<List<TreeNode<T>>> listNodesForEachDepth() {
@@ -155,6 +173,7 @@ public class TreeNode<T extends Comparable<T>> {
 
         return lists;
     }
+
 
 //    public TreeNode<T> delete(T d) {
 //        if (isBinarySearch) {

@@ -9,7 +9,8 @@ public class RandomBinaryTree {
 
     public static void main(String[] args) {
         TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
-        treeNode.isBinarySearch = false;
+        treeNode.isBinarySearch = true; // Change this to toggle
+        System.out.println("Is binary search tree = " + treeNode.isBinarySearch);
         for (int i = 0; i < 10; i++) {
             treeNode.add(RandomUtils.nextInt() % 100);
         }
@@ -40,12 +41,14 @@ public class RandomBinaryTree {
         // print linked list
         System.out.println("\n\nLinked lists");
         final List<List<TreeNode<Integer>>> lists = treeNode.listNodesForEachDepth();
-        for (List<TreeNode<Integer>> list: lists) {
-            for (TreeNode<Integer> node: list) {
+        for (List<TreeNode<Integer>> list : lists) {
+            for (TreeNode<Integer> node : list) {
                 System.out.print(node.data + ",");
             }
             System.out.println();
         }
+
+        System.out.println("\nBFS = " + treeNode.bfs());
 
 //        if (isFound) {
 //            // delete
