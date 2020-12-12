@@ -1,5 +1,7 @@
 package com.programming.exercises.practice.datastructure;
 
+import org.apache.commons.lang3.Validate;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,6 +19,10 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
 
     public Vertex<T, W> getAnyVertex() {
         return vertexMap.entrySet().stream().findAny().get().getValue();
+    }
+
+    public boolean isVertex(T data) {
+        return vertexMap.containsKey(data);
     }
 
     private Vertex<T, W> getVertex(T data) {
@@ -111,7 +117,7 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
                 // replace it with connected nodes
                 for (Vertex<T, W> connectedVertex : graphMap.get(popped)) {
                     if (visited.contains(connectedVertex)) continue;
-                    
+
                     queue.enqueue(connectedVertex);
                     visited.add(connectedVertex);
                     sb.append(connectedVertex.data + ",");
@@ -121,6 +127,43 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
 
         visited.clear();
         return sb.toString();
+    }
+
+    public boolean isRouteExist(T source, T dest) {
+        if (source.equals(dest)) throw new IllegalArgumentException();
+
+        Validate.notNull(source);
+        Validate.isTrue(isVertex(source), source + " not present");
+        final Vertex<T, W> sourceVertex = getVertex(source);
+        visited.add(sourceVertex);
+
+        Validate.notNull(dest);
+        Validate.isTrue(isVertex(dest), dest + " not present");
+        final Vertex<T, W> destVertex = getVertex(dest);
+        Validate.notNull(destVertex);
+
+        return isRouteExist(sourceVertex, destVertex, "");
+    }
+
+    private boolean isRouteExist(Vertex<T, W> sourceVertex, Vertex<T, W> destVertex, String route) {
+        route += sourceVertex.data + "->";
+        visited.add(sourceVertex);
+        if (graphMap.containsKey(sourceVertex)) {
+            // replace it with connected nodes
+            for (Vertex<T, W> connectedVertex : graphMap.get(sourceVertex)) {
+                if (visited.contains(connectedVertex)) continue;
+
+                if (connectedVertex.equals(destVertex)) {
+                    route += connectedVertex.data;
+                    System.out.println(route);
+                    return true;
+                }
+
+                if (isRouteExist(connectedVertex, destVertex, route)) return true;
+            }
+        }
+
+        return false;
     }
 
 }

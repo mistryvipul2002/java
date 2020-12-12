@@ -2,6 +2,7 @@ package com.programming.exercises.practice.graph;
 
 import com.programming.exercises.practice.datastructure.Graph;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.Validate;
 
 public class GraphUtil {
 
@@ -14,12 +15,14 @@ public class GraphUtil {
     }
 
     public static void main(String[] args) {
-        final Graph<String, Integer> graph = randomGraph(true);
+        final Graph<String, Integer> graph = randomGraph(false);
         System.out.println(graph);
 
-        final String dataStartingNode = graph.getAnyVertex().data;
+        final String dataStartingNode = RandomStringUtils.randomNumeric(1);
         System.out.println("Starting node -> " + dataStartingNode);
         System.out.println();
+
+        Validate.isTrue(graph.isVertex(dataStartingNode));
 
         // dfs with stack
         System.out.println("DFS with stack -> " + graph.dfsWithStack(dataStartingNode));
@@ -33,5 +36,11 @@ public class GraphUtil {
 
         // bfs with queue
         System.out.println("BFS with queue -> " + graph.bfsWithQueue(dataStartingNode));
+
+        System.out.println();
+        final String source = RandomStringUtils.randomNumeric(1);
+        final String dest = RandomStringUtils.randomNumeric(1);
+        System.out.println("Route exists from " + source + " to " + dest + " ? ");
+        System.out.println(graph.isRouteExist(source, dest));
     }
 }
