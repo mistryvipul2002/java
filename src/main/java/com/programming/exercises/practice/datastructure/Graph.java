@@ -5,10 +5,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Graph<T extends Comparable<T>, W extends Comparable<T>> {
+public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
     private Map<T, Vertex<T, W>> vertexMap = new HashMap<>();
+    private Map<Vertex<T, W>, Boolean> visited = new HashMap<>();
     private Map<Vertex<T, W>, Set<Vertex<T, W>>> graphMap = new HashMap<>();
     public boolean isDirected = false;
+
+    public Vertex<T, W> getAnyVertex() {
+        return vertexMap.entrySet().stream().findAny().get().getValue();
+    }
 
     public void edge(T source, T dest) {
         if (source.compareTo(dest) == 0) return;
@@ -42,25 +47,45 @@ public class Graph<T extends Comparable<T>, W extends Comparable<T>> {
                 '}';
     }
 
-    public void dfs(T data) {
+    public String dfsWithStack(T data) {
         final Vertex<T, W> dataVertex = getVertex(data);
-        if (dataVertex == null) return;
+        if (dataVertex == null) return null;
+
+        StringBuffer sb = new StringBuffer();
 
         Stack<Vertex<T, W>> stack = new Stack<>();
         stack.push(dataVertex);
 
         while (!stack.isEmpty()) {
             final Vertex<T, W> popped = stack.pop();
-            if (popped.state == State.VISITED) continue;
-            
-            popped.state = State.VISITED;
-            System.out.println(popped);
+            if (visited.containsKey(popped)) continue;
+
+            visited.put(popped, true);
+            sb.append(popped.data + ",");
 
             if (graphMap.containsKey(popped)) {
                 // replace it with connected nodes
                 for (Vertex<T, W> connectedVertex : graphMap.get(popped)) {
-                    if (connectedVertex.state == State.VISITED) continue;
+                    if (visited.containsKey(connectedVertex)) continue;
                     stack.push(connectedVertex);
+                }
+            }
+        }
+
+        visited.clear();
+        return sb.toString();
+    }
+
+    public void dfsWithRecursion(T data, StringBuffer sb) {
+        final Vertex<T, W> dataVertex = getVertex(data);
+        if (dataVertex == null || visited.containsKey(dataVertex)) return;
+
+        if (graphMap.containsKey(dataVertex)) {
+            for (Vertex<T, W> connectedVertex : graphMap.get(dataVertex)) {
+                if (!visited.containsKey(connectedVertex)) {
+                    visited.put(dataVertex, true);
+                    sb.append(connectedVertex.data + ",");
+                    dfsWithRecursion(connectedVertex.data, sb);
                 }
             }
         }

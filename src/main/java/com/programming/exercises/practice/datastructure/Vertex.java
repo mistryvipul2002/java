@@ -4,10 +4,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Vertex<T extends Comparable<T>, W extends Comparable<T>> implements Comparable<Vertex<T, W>> {
+public class Vertex<T extends Comparable<T>, W extends Comparable<W>> implements Comparable<Vertex<T, W>> {
     public T data;
     public W weight;
-    public State state = State.NOT_VISITED;
 
     public Vertex(T data) {
         this.data = data;
@@ -15,7 +14,7 @@ public class Vertex<T extends Comparable<T>, W extends Comparable<T>> implements
 
     @Override
     public String toString() {
-        return data.toString() + (state == State.VISITED ? "*" : "");
+        return data.toString();
     }
 
     @Override
