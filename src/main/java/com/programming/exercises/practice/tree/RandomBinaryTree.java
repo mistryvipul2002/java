@@ -7,17 +7,30 @@ import java.util.List;
 
 public class RandomBinaryTree {
 
+    private static int totNodes = 10;
+    private static boolean isBinarySearchTree = false;
+    private static boolean isRandom = false;
+    private static int[] treeData = {12, 27, 17, 43, 54, 90, 56, 86, 81, 60, 91};
+
     public static void main(String[] args) {
-        TreeNode<Integer> treeNode = new TreeNode<>(RandomUtils.nextInt() % 100);
-        treeNode.isBinarySearch = true; // Change this to toggle
-        System.out.println("Is binary search tree = " + treeNode.isBinarySearch);
-        for (int i = 0; i < 10; i++) {
-            treeNode.add(RandomUtils.nextInt() % 100);
+        System.out.println("Is binary search tree = " + isBinarySearchTree);
+        TreeNode<Integer> treeNode;
+        if (isRandom) {
+            treeNode = new TreeNode<>(RandomUtils.nextInt() % 100, isBinarySearchTree);
+            treeNode.isBinarySearch = isBinarySearchTree;
+            for (int i = 0; i < totNodes; i++) {
+                treeNode.add(RandomUtils.nextInt() % 100);
+            }
+        } else {
+            treeNode = new TreeNode<>(treeData[0], isBinarySearchTree);
+            for (int i = 1; i < treeData.length; i++) {
+                treeNode.add(treeData[i]);
+            }
         }
         System.out.println(treeNode);
 
         // Traversal the tree
-        StringBuffer sb = new StringBuffer("Pre-order: ");
+        StringBuffer sb = new StringBuffer("Pre-order (DFS): ");
         treeNode.preOrder(sb);
         System.out.println(sb);
 

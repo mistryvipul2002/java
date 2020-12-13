@@ -7,12 +7,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TreeNode<T extends Comparable<T>> {
-    public boolean isBinarySearch = true;
+    public boolean isBinarySearch;
     public T data;
     public TreeNode<T> left, right;
 
-    public TreeNode(T d) {
+    public TreeNode(T d, boolean isBinarySearch) {
         this.data = d;
+        this.isBinarySearch = isBinarySearch;
     }
 
     public void add(T data) {
@@ -26,13 +27,13 @@ public class TreeNode<T extends Comparable<T>> {
     private void addSorted(T data) {
         if (data.compareTo(this.data) >= 0) {
             if (right == null) {
-                right = new TreeNode<T>(data);
+                right = new TreeNode<T>(data, isBinarySearch);
             } else {
                 right.addSorted(data);
             }
         } else {
             if (left == null) {
-                left = new TreeNode<T>(data);
+                left = new TreeNode<T>(data, isBinarySearch);
             } else {
                 left.addSorted(data);
             }
@@ -43,16 +44,14 @@ public class TreeNode<T extends Comparable<T>> {
         if (RandomUtils.nextInt() % 2 == 0) {
             // go left
             if (node.left == null) {
-                node.left = new TreeNode<>(data);
-                node.left.isBinarySearch = false;
+                node.left = new TreeNode<>(data, isBinarySearch);
             } else {
                 addRandom(node.left, data);
             }
         } else {
             // go right
             if (node.right == null) {
-                node.right = new TreeNode<>(data);
-                node.right.isBinarySearch = false;
+                node.right = new TreeNode<>(data, isBinarySearch);
             } else {
                 addRandom(node.right, data);
             }
