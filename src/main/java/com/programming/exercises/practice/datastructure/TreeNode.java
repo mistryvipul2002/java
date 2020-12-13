@@ -232,6 +232,12 @@ public class TreeNode<T extends Comparable<T>> {
 //        }
 //    }
 
+    public void printAllPathsSum(int sum, String output) {
+        if (sum + (Integer) data == 0) System.out.println(output + "," + data);
+        if (left != null) left.printAllPathsSum(sum + (Integer) data, output + "," + data);
+        if (right != null) right.printAllPathsSum(sum + (Integer) data, output + "," + data);
+    }
+
     // LDR (left-data-right)
     public void inOrder(StringBuffer sb) {
         if (left != null) left.inOrder(sb);
@@ -262,7 +268,7 @@ public class TreeNode<T extends Comparable<T>> {
 
     public void print(String prefix, TreeNode node, boolean isLeft, StringBuffer sb) {
         if (node != null) {
-            sb.append(prefix + (isLeft ? "L- " : "R- ") + node.data + "\n");
+            sb.append(prefix + (isLeft ? "L " : "R ") + node.data + "\n");
             print(prefix + (isLeft ? "|   " : "    "), node.left, true, sb);
             print(prefix + (isLeft ? "|   " : "    "), node.right, false, sb);
         }

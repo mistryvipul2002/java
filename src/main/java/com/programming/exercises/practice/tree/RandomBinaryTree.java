@@ -7,19 +7,19 @@ import java.util.List;
 
 public class RandomBinaryTree {
 
-    private static int totNodes = 10;
-    private static boolean isBinarySearchTree = false;
+    private static int totRandomNodes = 20;
+    private static boolean isBinarySearchTree = true;
     private static boolean isRandom = false;
-    private static int[] treeData = {12, 27, 17, 43, 54, 90, 56, 86, 81, 60, 91};
+    private static int[] treeData = {87, -5, 90, 63, 82, -13, -69, 65, 72, -44, 77, 50, 8, 25, 11, -16, 62, 84, 29, 73, 16};
 
     public static void main(String[] args) {
         System.out.println("Is binary search tree = " + isBinarySearchTree);
         TreeNode<Integer> treeNode;
         if (isRandom) {
-            treeNode = new TreeNode<>(RandomUtils.nextInt() % 100, isBinarySearchTree);
+            treeNode = new TreeNode<>(getRandomInt(), isBinarySearchTree);
             treeNode.isBinarySearch = isBinarySearchTree;
-            for (int i = 0; i < totNodes; i++) {
-                treeNode.add(RandomUtils.nextInt() % 100);
+            for (int i = 0; i < totRandomNodes; i++) {
+                treeNode.add(getRandomInt());
             }
         } else {
             treeNode = new TreeNode<>(treeData[0], isBinarySearchTree);
@@ -47,12 +47,12 @@ public class RandomBinaryTree {
         System.out.println("IsBalanced: " + treeNode.isBalanced());
 
         // search
-        final int toFind = RandomUtils.nextInt() % 100;
+        final int toFind = getRandomInt();
         final boolean isFound = treeNode.isFound(toFind);
         System.out.println("\n" + toFind + " " + (isFound ? "" : "not") + " found");
 
         // print linked list
-        System.out.println("\n\nLinked lists");
+        System.out.println("\nLinked lists");
         final List<List<TreeNode<Integer>>> lists = treeNode.listNodesForEachDepth();
         for (List<TreeNode<Integer>> list : lists) {
             for (TreeNode<Integer> node : list) {
@@ -63,11 +63,20 @@ public class RandomBinaryTree {
 
         System.out.println("\nBFS = " + treeNode.bfs());
 
+        System.out.println();
+        int sum = 82;
+        System.out.println("All paths where sum from root is : ");
+        treeNode.printAllPathsSum(-sum, "");
+
 //        if (isFound) {
 //            // delete
 //            treeNode.delete(toFind);
 //            System.out.println("After deletion of " + toFind);
 //            System.out.println(treeNode);
 //        }
+    }
+
+    private static int getRandomInt() {
+        return RandomUtils.nextInt() % 100 * (RandomUtils.nextInt() % 2 == 1 ? -1 : 1);
     }
 }
