@@ -2,16 +2,18 @@ package com.programming.exercises.practice.datastructure;
 
 import org.apache.commons.lang3.Validate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
-    private Map<T, Vertex<T, W>> vertexMap = new HashMap<>();
+    private final Map<T, Vertex<T, W>> vertexMap = new HashMap<>();
     public Set<Vertex<T, W>> visited = new HashSet<>();
-    private Map<Vertex<T, W>, Set<Vertex<T, W>>> graphMap = new HashMap<>();
-    public boolean isDirected = false;
+    private final Map<Vertex<T, W>, Set<Vertex<T, W>>> graphMap = new HashMap<>();
+    public boolean isDirected;
 
     public Graph(boolean isDirected) {
         this.isDirected = isDirected;
@@ -33,6 +35,8 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
     }
 
     public void addEdge(T source, T dest) {
+        Validate.notNull(source);
+        Validate.notNull(dest);
         if (source.compareTo(dest) == 0) return;
         final Vertex<T, W> sourceVertex = getVertex(source);
         final Vertex<T, W> destVertex = getVertex(dest);
@@ -61,7 +65,7 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
         final Vertex<T, W> dataVertex = getVertex(data);
         if (dataVertex == null) return null;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         Stack<Vertex<T, W>> stack = new Stack<>();
         stack.push(dataVertex);
@@ -71,7 +75,7 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
             if (visited.contains(popped)) continue;
 
             visited.add(popped);
-            sb.append(popped.data + ",");
+            sb.append(popped.data).append(",");
 
             if (graphMap.containsKey(popped)) {
                 // replace it with connected nodes
@@ -89,7 +93,7 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
     public void dfsWithRecursion(T data, StringBuffer sb) {
         final Vertex<T, W> dataVertex = getVertex(data);
         visited.add(dataVertex);
-        sb.append(data + ",");
+        sb.append(data).append(",");
 
         if (graphMap.containsKey(dataVertex)) {
             for (Vertex<T, W> connectedVertex : graphMap.get(dataVertex)) {
@@ -101,14 +105,14 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
     }
 
     public String bfsWithQueue(T data) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         final Vertex<T, W> dataVertex = getVertex(data);
         if (dataVertex == null) return null;
 
         Queue<Vertex<T, W>> queue = new Queue<>();
         queue.enqueue(dataVertex);
         visited.add(dataVertex);
-        sb.append(dataVertex.data + ",");
+        sb.append(dataVertex.data).append(",");
 
         while (!queue.isEmpty()) {
             final Vertex<T, W> popped = queue.dequeue().data;
@@ -120,7 +124,7 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
 
                     queue.enqueue(connectedVertex);
                     visited.add(connectedVertex);
-                    sb.append(connectedVertex.data + ",");
+                    sb.append(connectedVertex.data).append(",");
                 }
             }
         }
@@ -163,6 +167,54 @@ public class Graph<T extends Comparable<T>, W extends Comparable<W>> {
             }
         }
 
+        return false;
+    }
+
+    public boolean isCycle() {
+        for (T data : vertexMap.keySet()) {
+            final Vertex<T, W> vertex = getVertex(data);
+            if (visited.contains(vertex)) continue;
+            visited.add(vertex);
+
+            final boolean isCycle = isCycle(vertex, new ArrayList<>() {{
+                add(vertex);
+            }});
+            if (isCycle) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isCycle(Vertex<T, W> sourceVertex, List<Vertex<T, W>> parents) {
+        if (graphMap.containsKey(sourceVertex)) {
+            for (Vertex<T, W> connectedVertex : graphMap.get(sourceVertex)) {
+                if (parents.contains(connectedVertex)) {
+                    if (!isDirected && parents.get(parents.size() - 2).equals(connectedVertex)) {
+                        continue;
+                    }
+
+                    // cycle exists
+                    parents.add(connectedVertex);
+                    System.out.println(parents);
+                    return true;
+                }
+
+                if (visited.contains(connectedVertex)) {
+                    continue;
+                }
+                visited.add(connectedVertex);
+
+                final boolean cycle = isCycle(connectedVertex, new ArrayList<>() {{
+                    addAll(parents);
+                    add(connectedVertex);
+                }});
+                if (cycle) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
