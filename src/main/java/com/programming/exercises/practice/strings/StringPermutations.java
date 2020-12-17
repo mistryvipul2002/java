@@ -10,7 +10,7 @@ package com.programming.exercises.practice.strings;
 public class StringPermutations {
 
     public static void main(String[] args) {
-        perm("", "abc");
+        perm("", "abcd");
     }
 
     static void perm(String prefix, String str) {
