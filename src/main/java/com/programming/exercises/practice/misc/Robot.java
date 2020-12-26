@@ -7,16 +7,17 @@ package com.programming.exercises.practice.misc;
  */
 public class Robot {
 
-    private static int[][] offlimit = {
-            {0, 1, 0, 0, 0},
-            {0, 1, 1, 0, 0},
-            {0, 1, 1, 0, 0},
-            {0, 0, 0, 0, 1},
-            {0, 0, 1, 0, 0},
+    // place "1" to block (no route through that point)
+    private static final int[][] offlimit = {
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
     };
 
     public static void main(String[] args) {
-        int[][] mat = new int[5][5];
+        int[][] mat = new int[2][3];
         robot(mat, 0, 0, "");
     }
 
