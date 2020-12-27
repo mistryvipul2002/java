@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class FindMinInSortedArray {
 
     public static void main(String[] args) {
-        final ArrayList<Integer> arrList = Util.randomRotatedSortedArr(10);
+        final ArrayList<Integer> arrList = Util.randomRotatedSortedArrayList(10);
         System.out.println(arrList);
 
         Integer[] arr = arrList.toArray(new Integer[2]);
